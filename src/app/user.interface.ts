@@ -1,5 +1,5 @@
 export interface UserInterface{
-mail : string;
+email : string;
 username : string;
 
 }
