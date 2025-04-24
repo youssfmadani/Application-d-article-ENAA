@@ -1,0 +1,5 @@
+.bg-navy { background-color: #1E3A8A; }
+.text-navy { color: #1E3A8A; }
+.text-gold { color: #D4AF37; }
+.focus\:ring-gold:focus { --tw-ring-color: #D4AF37; }
+.focus\:border-gold:focus { border-color: #D4AF37; }
