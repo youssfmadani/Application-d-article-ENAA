@@ -1,1 +1,18 @@
-<p>post-list works!</p>
+<div class="post-list-container">
+    <h2>Posts List</h2>
+    <div *ngIf="loading">Loading...</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+    <ul *ngIf="posts.length > 0">
+      <li *ngFor="let post of posts">
+        <span>{{ post.title }}</span>
+        <button (click)="editPost(post.id)">Edit</button>
+        <button (click)="deletePost(post.id)">Delete</button>
+      </li>
+    </ul>
+  
+    <div *ngIf="posts.length === 0">
+      <p>No posts available.</p>
+    </div>
+  </div>
+  

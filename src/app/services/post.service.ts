@@ -1,38 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Article } from '../models/article';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://localhost:3000/articles'; // JSON Server URL
+  private apiUrl = 'http://your-backend-api-url/posts';  // Replace with your backend API URL
 
   constructor(private http: HttpClient) {}
 
-  // Get all articles
-  getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiUrl);
+  getPosts(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);  // Fetch all posts
   }
 
-  // Get a single article by ID
-  getArticle(id: number): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrl}/${id}`);
+  getPost(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);  // Fetch a single post by ID
   }
 
-  // Create a new article
-  createArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, article);
+  createPost(post: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, post);  // Create a new post
   }
 
-  // Update an existing article
-  updateArticle(id: number, article: Article): Observable<Article> {
-    return this.http.put<Article>(`${this.apiUrl}/${id}`, article);
+  updatePost(id: string, post: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, post);  // Update post by ID
   }
 
-  // Delete an article
-  deleteArticle(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deletePost(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);  // Delete post by ID
   }
 }
