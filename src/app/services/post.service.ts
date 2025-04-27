@@ -6,27 +6,56 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://your-backend-api-url/posts';  // Replace with your backend API URL
+  private apiUrl = 'https://firestore.googleapis.com/v1/projects/enaa-blog-fa8d4/databases/(default)/documents/ENAA/post?key=AIzaSyAXQ4wh_DzO8TOTDG--uRr9vdXXRHqEVK8';  // Correct Firestore endpoint without API key
 
   constructor(private http: HttpClient) {}
 
+  // Get all posts from Firestore
   getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);  // Fetch all posts
+    return this.http.get<any[]>(`${this.apiUrl}`);  // Fetch all posts
   }
 
+  // Get a single post by ID from Firestore
   getPost(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);  // Fetch a single post by ID
   }
 
+  // Create a new post in Firestore
   createPost(post: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, post);  // Create a new post
+    // Firestore POST to create a new document
+    const postData = {
+      fields: {
+        title: { stringValue: post.title },
+        content: { stringValue: post.content },
+        author: { stringValue: post.author },
+        date: { stringValue: post.date },
+        tags: { arrayValue: { values: post.tags.map((tag: any) => ({ stringValue: tag })) } },
+        imageUrl: { stringValue: post.imageUrl },
+        likes: { integerValue: post.likes }
+      }
+    };
+    return this.http.post<any>(this.apiUrl, postData);  // Send data to Firestore
   }
 
+  // Update an existing post in Firestore
   updatePost(id: string, post: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, post);  // Update post by ID
+    // Firestore PUT to update the existing document
+    const postData = {
+      fields: {
+        title: { stringValue: post.title },
+        content: { stringValue: post.content },
+        author: { stringValue: post.author },
+        date: { stringValue: post.date },
+        tags: { arrayValue: { values: post.tags.map((tag: any) => ({ stringValue: tag })) } },
+        imageUrl: { stringValue: post.imageUrl },
+        likes: { integerValue: post.likes }
+      }
+    };
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, postData);  // Firestore PATCH for updating document
   }
 
+  // Delete a post by ID from Firestore
   deletePost(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);  // Delete post by ID
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);  // Firestore DELETE request for a post
   }
 }
