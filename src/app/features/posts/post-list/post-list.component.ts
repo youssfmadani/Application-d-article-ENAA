@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';  // Import Router for navigation
 import { PostService } from '../../../services/post.service';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-list',
-  standalone: true,
-  imports: [CommonModule],  // Include CommonModule here
   templateUrl: './post-list.component.html',
+  imports: [RouterModule,CommonModule],  // No additional imports needed here
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
+truncateContent(arg0: any,arg1: number) {
+throw new Error('Method not implemented.');
+}
   posts: any[] = [];
   errorMessage: string = '';
   loading: boolean = false;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private router: Router  // Inject the Router to navigate
+  ) {}
 
   ngOnInit(): void {
     this.getPosts();
@@ -39,7 +45,7 @@ export class PostListComponent implements OnInit {
       this.loading = true;
       this.postService.deletePost(id).subscribe(
         () => {
-          this.getPosts();
+          this.getPosts();  // Reload the posts after deletion
         },
         (error) => {
           this.errorMessage = 'Error deleting post';
@@ -50,6 +56,6 @@ export class PostListComponent implements OnInit {
   }
 
   editPost(id: string): void {
-    // Implement navigation to edit form with the post's ID
+    this.router.navigate(['/edit', id]);  // Navigate to the edit form with the post's ID
   }
 }
