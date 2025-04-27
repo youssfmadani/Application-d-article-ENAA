@@ -2,7 +2,7 @@
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <!-- Blog Branding -->
     <a routerLink="/" class="flex items-center space-x-3">
-      <img src="../../assets/images/enaa-blog.png" class="h-8" alt="Blog Logo" />
+      <img src="https://media-hosting.imagekit.io/a9b61a6e797043f3/enaa%20blog.png?Expires=1840208262&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=i6bzPZIkgrhMETYU8NJVN7kxDGhT20c-A0wkrbbUscb0WG5vYDiVL~tz7CNf-HEPMOhgFswUc3OEXJwpvLSDDvxDKf9cZew0sBTrvkcpk-T8tjQi42wj7gCxnyFp3dCS4b43ajLBkbR-CN6LpDryavKmEKvCPm0xB4LLkxYS3hGDm6hpTxTF5hWkGBnGNGcNUc7WOqprdBd8n8alrgNYv-d9dIiY7axeWhF0cCkA8BcC6jt-G816rNgqujxhSs4S~KQZGnMEYiVz76N171nQgPSldM~06tQTLMeAWRtuWuhSxoRbWBMLypy6mEDKEzqEW-vQ9YWcw8WPCl2cFzd4QA__" class="h-8" alt="Blog Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">ENAA BLOG</span>
     </a>
     <!-- Right Side: Search and Menu Toggle -->
@@ -45,12 +45,12 @@
       <!-- Menu Links -->
       <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-navy md:bg-transparent md:space-x-8 md:flex-row md:mt-0 md:border-0">
         <li>
-          <a routerLink="/home" class="block py-2 px-3 text-white hover:text-yellow-400 transition-colors duration-200 menu-link">Home</a>
+          <a routerLink="/" class="block py-2 px-3 text-white hover:text-yellow-400 transition-colors duration-200 menu-link">Home</a>
         </li>
         <li>
-          <a routerLink="/posts" class="block py-2 px-3 text-white hover:text-yellow-400 transition-colors duration-200 menu-link">Post</a>
+          <a routerLink="/posts" class="block py-2 px-3 text-white hover:text-yellow-400 transition-colors duration-200 menu-link">Posts</a>
         </li>
-        <li>
+        <li *ngIf="currentUser()">
           <a routerLink="/posts/new" class="block py-2 px-3 text-white hover:text-yellow-400 transition-colors duration-200 menu-link">Create Post</a>
         </li>
         <li>
